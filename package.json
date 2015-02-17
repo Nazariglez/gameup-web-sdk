@@ -1,6 +1,6 @@
 {
   "name": "gameup-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0-dev",
   "description": "The browser SDK for the GameUp service.",
   "main": "dist/gameup.js",
   "repository": {
