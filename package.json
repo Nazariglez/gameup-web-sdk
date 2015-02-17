@@ -1,0 +1,46 @@
+{
+  "name": "gameup-sdk",
+  "version": "0.1.0-dev",
+  "description": "The browser SDK for the GameUp service.",
+  "main": "dist/gameup.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gameup-io/gameup-browser-sdk"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gameup",
+    "games",
+    "gaming",
+    "game-sdk",
+    "games service",
+    "game library",
+    "typescript"
+  ],
+  "author": "Chris Molozian <chris@gameup.io>",
+  "contributors": [
+    {
+      "name": "Andrei Mihu",
+      "email": "andrei@gameup.io"
+    },
+    {
+      "name": "Mo Firouz",
+      "email": "mo@gameup.io"
+    }
+  ],
+  "license": "Apache 2",
+  "analyze": true,
+  "devDependencies": {
+    "event-stream": "^3.1.7",
+    "gulp": "^3.8.10",
+    "gulp-gh-pages": "^0.4.0",
+    "gulp-tsd": "^0.0.4",
+    "gulp-typedoc": "^1.0.6",
+    "gulp-typescript": "^2.3.0",
+    "gulp-util": "^3.0.3",
+    "tsd": "^0.5.7",
+    "typescript": "^1.4.1"
+  }
+}
