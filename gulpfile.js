@@ -36,15 +36,6 @@ gulp.task('compile', function() {
       output.js.pipe(gulp.dest('build/js')));
 });
 
-gulp.task('test', function() {
-  var testOutput = gulp
-      .src('test/*.ts')
-      .pipe(typescript(project));
-    
-  return eventStream.merge(
-      testOutput.js.pipe(gulp.dest('build/test/')));
-});
-
 gulp.task('typedoc', function() {
   return gulp
       .src('lib/*.ts')
@@ -64,7 +55,6 @@ gulp.task('deploy', ['typedoc'], function () {
 
 gulp.task('watch', ['compile'], function() {
   gulp.watch('lib/*.ts', ['compile']);
-  gulp.watch('test/*.ts', ['test']);
 });
 
 gulp.task('default', ['watch'], function() {

@@ -128,6 +128,9 @@ module GameUp {
         data: payload,
         type: method,
         url: to,
+        xhrFields: {
+          mozSystem: true, // work with FireFoxOS
+        },
         headers: {
           "Authorization": "Basic " + btoa(this.apikey + ":" + gamerToken)
         },
