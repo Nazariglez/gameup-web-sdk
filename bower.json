@@ -1,6 +1,6 @@
 {
   "name": "gameup-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0-dev",
   "homepage": "https://github.com/gameup-io/gameup-web-sdk",
   "description": "Web SDK for the GameUp service.",
   "main": "dist/gameup.js",
