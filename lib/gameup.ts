@@ -121,8 +121,7 @@ module GameUp {
       }
 
       var ajaxSettings : JQueryAjaxSettings = {
-        contentType: "application/json",
-        dataType: 'json',
+        contentType: 'application/json',
         crossDomain: true,
         timeout: 3000,
         data: payload,

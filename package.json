@@ -8,7 +8,7 @@
     "url": "https://github.com/gameup-io/gameup-browser-sdk"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp compile && mocha -u tdd -t 5000"
   },
   "keywords": [
     "gameup",
@@ -40,6 +40,8 @@
     "gulp-typedoc": "^1.0.6",
     "gulp-typescript": "^2.3.0",
     "gulp-util": "^3.0.3",
+    "jsdom": "^3.1.2",
+    "mocha": "^2.2.1",
     "tsd": "^0.5.7",
     "typescript": "^1.4.1"
   }

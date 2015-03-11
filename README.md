@@ -91,9 +91,9 @@ The Web SDK is written in Typescript and uses jQuery to send and receive AJAX re
 
 To compile and run tests:
 
-- `gulp test`
+- `npm test` (for headless tests)
 
-And open `test/gameup-unit-test.html` in your browser.
+And open `test/gameup-popup-test.html` in your browser.
 
 ### Contribute
 
