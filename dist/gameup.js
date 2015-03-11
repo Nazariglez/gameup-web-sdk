@@ -40,13 +40,15 @@ var GameUp;
                 gamerToken = "";
             }
             var ajaxSettings = {
-                contentType: "application/json",
-                dataType: 'json',
+                contentType: 'application/json',
                 crossDomain: true,
                 timeout: 3000,
                 data: payload,
                 type: method,
                 url: to,
+                xhrFields: {
+                    mozSystem: true,
+                },
                 headers: {
                     "Authorization": "Basic " + btoa(this.apikey + ":" + gamerToken)
                 },
