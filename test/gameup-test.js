@@ -144,14 +144,14 @@ describe('Web SDK Tests', function() {
       });
     });
 
-    it.skip('Add Object to Cloud Storage', function(done) {
+    it('Add Object to Cloud Storage', function(done) {
       var object = {
         'level': 6,
         'level_name': 'bloodline',
         'bosses_killed': ['mo', 'chris', 'andrei']
       };
 
-      client.storagePut(token, storageKey, JSON.stringify(object), {
+      client.storagePut(token, storageKey, object, {
         success: function(status, data) {
           assert.strictEqual(status, 204);
           done();
@@ -160,7 +160,7 @@ describe('Web SDK Tests', function() {
       });
     });
 
-    it.skip('Get Object from Cloud Storage', function(done) {
+    it('Get Object from Cloud Storage', function(done) {
       client.storageGet(token, storageKey, {
         success: function(status, data) {
           assert.strictEqual(status, 200);
@@ -180,7 +180,7 @@ describe('Web SDK Tests', function() {
       });
     });
 
-    it.skip('Update Gamer Achievement', function(done) {
+    it('Update Gamer Achievement', function(done) {
       client.updateAchievement(token, achievementId, 10, {
         success: function(status, data) {
           assert.ok(status === 201 || status === 204, "Bad Response Status.");

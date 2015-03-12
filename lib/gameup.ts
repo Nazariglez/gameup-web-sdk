@@ -414,10 +414,12 @@ module GameUp {
      * Store a JSON object in Cloud Storage with the supplied key.
      *
      * ```javascript
-     * client.storagePut("a gamer token", "SAVE_GAME_1", {
+     * var obj = {
      *   level: 10,
      *   coins: 1000
-     * }, {
+     * };
+     *
+     * client.storagePut("a gamer token", "SAVE_GAME_1", obj, {
      *   success: function(status, data) {
      *   },
      *   error: function(status, data) {
@@ -432,7 +434,8 @@ module GameUp {
      */
     storagePut(token: string, storageKey: string, payload: any, callback: ResponseHandler) {
       var encodedKey: string = encodeURIComponent(storageKey);
-      this.sendApiRequest(callback, "/gamer/storage/" + encodedKey, "PUT", token, payload);
+      var encodedPayload: string = JSON.stringify(payload);
+      this.sendApiRequest(callback, "/gamer/storage/" + encodedKey, "PUT", token, encodedPayload);
     }
 
     /**
