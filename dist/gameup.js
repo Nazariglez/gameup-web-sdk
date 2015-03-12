@@ -118,7 +118,8 @@ var GameUp;
         };
         Client.prototype.storagePut = function (token, storageKey, payload, callback) {
             var encodedKey = encodeURIComponent(storageKey);
-            this.sendApiRequest(callback, "/gamer/storage/" + encodedKey, "PUT", token, payload);
+            var encodedPayload = JSON.stringify(payload);
+            this.sendApiRequest(callback, "/gamer/storage/" + encodedKey, "PUT", token, encodedPayload);
         };
         Client.prototype.storageDelete = function (token, storageKey, callback) {
             var encodedKey = encodeURIComponent(storageKey);
