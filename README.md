@@ -14,8 +14,6 @@ For the full list of features check out our [main documentation](https://gameup.
 
 The client SDK is available on [Bower.io](http://bower.io/search/?q=gameup-sdk)
 
-The SDK depends on jQuery (~2.1.3) to make Ajax calls.
-
 ### Using [Bower.io](http://bower.io/)
 
 To include the library in your project:
@@ -28,7 +26,7 @@ bower install --save gameup-sdk
 
 To use the GameUp SDK you will need an API Key. You can get one in the GameUp [Dashboard](http://dashboard.gameup.io).
 
-The SDK has an asynchronous client API; it uses jQuery Ajax to make network calls. Every client request uses a callback function to handle API responses.
+The SDK has an asynchronous client API; Every client request uses a callback function to handle API responses.
 
 ```js
 var client = new GameUp.Client("Your API Key");
@@ -77,7 +75,7 @@ The Web SDK is still in _flux_, we're looking for [feedback](mailto:hello@gameup
 
 ### Developer notes
 
-The Web SDK is written in Typescript and uses jQuery to send and receive AJAX requests. To develop on the codebase you'll need to install:
+The Web SDK is written in Typescript. To develop on the codebase you'll need to install:
 
 - [Typescript](http://typescriptlang.org)
 - [Node.js](http://nodejs.org)
