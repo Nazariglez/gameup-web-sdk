@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-/// <reference path="../typings/tsd.d.ts" />
-declare var $: JQueryStatic;
-
 /**
  * The official Web SDK for the [GameUp](https://gameup.io/) service.
  *
@@ -53,7 +50,18 @@ module GameUp {
      * @param response The response object for the failed request.
      */
     error? (status: number, response?: any): any;
-  };
+  }
+
+    export interface AjaxSettings {
+        url:string;
+        data:string;
+        type:string;
+        contentType:string;
+        headers:{[key:string]:any};
+        timeout:number;
+        success? (data: any, status: number): any;
+        error? (xhr:XMLHttpRequest, status:number): any;
+    };
 
   /**
    * A GameUp client to interact with the GameUp Game API.
@@ -120,32 +128,54 @@ module GameUp {
         gamerToken = "";
       }
 
-      var ajaxSettings : JQueryAjaxSettings = {
+      var ajaxSettings : AjaxSettings = {
         contentType: 'application/json',
-        crossDomain: true,
         timeout: 3000,
         data: payload,
         type: method,
         url: to,
-        xhrFields: {
-          mozSystem: true, // work with FireFoxOS
-        },
         headers: {
           "Authorization": "Basic " + btoa(this.apikey + ":" + gamerToken)
         },
-        success: function(data: any, status: string, jqXHR: JQueryXHR) {
+        success: function(data: any, status: number) {
           if (typeof callback.success == 'function') {
-            callback.success(jqXHR.status, data);
+            callback.success(status, data);
           }
         },
-        error: function(jqXHR: JQueryXHR, status: string, errorThrown: string) {
+        error: function(xhr:XMLHttpRequest, status: number) {
           if (typeof callback.error == 'function') {
-            callback.error(jqXHR.status, jqXHR.responseJSON);
+            callback.error(status, xhr.responseText);
           }
         }
       };
 
-      $.ajax(ajaxSettings);
+      this.ajax(ajaxSettings);
+    }
+
+    private ajax(settings: AjaxSettings){
+        var http:XMLHttpRequest = new XMLHttpRequest();
+        //http.mozSystem = true;
+        http.timeout = settings.timeout;
+        http.open(settings.type, settings.url, true);
+        http.setRequestHeader("Content-type",settings.contentType);
+
+        for(var key in settings.headers){
+            http.setRequestHeader(key, settings.headers[key]);
+        }
+
+        //TODO: Maybe a match status codes with strings?
+
+        http.onreadystatechange = function(e){
+            if(http.readyState === 4){
+                if(http.status >= 200 && http.status < 300 || http.status === 304 ){
+                    if(settings.success)settings.success(JSON.parse(http.responseText),http.status);
+                }else{
+                    if(settings.error)settings.error(http,http.status);
+                }
+            }
+        };
+
+        http.send(settings.data);
     }
 
     private sendApiRequest(callback: ResponseHandler, to: string, method: string, gamerToken ?: string, payload ?: any) {

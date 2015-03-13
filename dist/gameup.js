@@ -41,29 +41,47 @@ var GameUp;
             }
             var ajaxSettings = {
                 contentType: 'application/json',
-                crossDomain: true,
                 timeout: 3000,
                 data: payload,
                 type: method,
                 url: to,
-                xhrFields: {
-                    mozSystem: true,
-                },
                 headers: {
                     "Authorization": "Basic " + btoa(this.apikey + ":" + gamerToken)
                 },
-                success: function (data, status, jqXHR) {
+                success: function (data, status) {
                     if (typeof callback.success == 'function') {
-                        callback.success(jqXHR.status, data);
+                        callback.success(status, data);
                     }
                 },
-                error: function (jqXHR, status, errorThrown) {
+                error: function (xhr, status) {
                     if (typeof callback.error == 'function') {
-                        callback.error(jqXHR.status, jqXHR.responseJSON);
+                        callback.error(status, xhr.responseText);
                     }
                 }
             };
-            $.ajax(ajaxSettings);
+            this.ajax(ajaxSettings);
+        };
+        Client.prototype.ajax = function (settings) {
+            var http = new XMLHttpRequest();
+            http.timeout = settings.timeout;
+            http.open(settings.type, settings.url, true);
+            http.setRequestHeader("Content-type", settings.contentType);
+            for (var key in settings.headers) {
+                http.setRequestHeader(key, settings.headers[key]);
+            }
+            http.onreadystatechange = function (e) {
+                if (http.readyState === 4) {
+                    if (http.status >= 200 && http.status < 300 || http.status === 304) {
+                        if (settings.success)
+                            settings.success(JSON.parse(http.responseText), http.status);
+                    }
+                    else {
+                        if (settings.error)
+                            settings.error(http, http.status);
+                    }
+                }
+            };
+            http.send(settings.data);
         };
         Client.prototype.sendApiRequest = function (callback, to, method, gamerToken, payload) {
             this.sendRequest(callback, this.API_URL + to, method, gamerToken, payload);
